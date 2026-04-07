@@ -1,9 +1,6 @@
 package com.example.shop.product;
 
-import com.example.shop.member.Member;
-import com.example.shop.member.MemberRepository;
 import com.example.shop.member.dto.MemberCreateRequest;
-import com.example.shop.member.dto.MemberUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -51,7 +48,7 @@ public class ProductService {
         product.updateInfo(request.getName(),request.getPrice(),request.getAmount());
     }
     //@Transtional
-    public void deletProduct(Long id){
+    public void deleteProduct(Long id){
         Product product=productRepository.findById(id);
         if (product==null){
             throw new RuntimeException("상품을 찾을 수 없습니다.");

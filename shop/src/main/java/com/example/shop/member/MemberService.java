@@ -2,9 +2,11 @@ package com.example.shop.member;
 
 import com.example.shop.member.dto.MemberCreateRequest;
 import com.example.shop.member.dto.MemberUpdateRequest;
+//import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.apache.bcel.classfile.annotation.RuntimeInvisAnnos;
+//import org.aspectj.apache.bcel.classfile.annotation.RuntimeInvisAnnos;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,7 +16,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    //@Transtional
+    @Transactional
     public long createMember(MemberCreateRequest request){
         Member existingMember=memberRepository.findByLoginId(request.getLoginId());
         if( existingMember!=null){
@@ -30,11 +32,11 @@ public class MemberService {
 
         return member.getId();
     }
-    //@Transtional(readOnly=True)
+    @Transactional(readOnly=true)
     public List<Member> getAllMembers(){
         return memberRepository.findAll();
     }
-    //@Transtional(readOnly=True)
+    @Transactional(readOnly = true)
     public Member getMemberById(Long id) {
         Member member =memberRepository.findById(id);
         if (member==null){
@@ -42,7 +44,7 @@ public class MemberService {
         }
         return member;
     }
-    //@Transtional
+    @Transactional
     public void updateMember(Long id, MemberUpdateRequest request){
         Member member=memberRepository.findById(id);
         if (member==null){
@@ -50,8 +52,8 @@ public class MemberService {
         }
         member.updateInfo(request.getPassword(),request.getPhoneNumber(),request.getAddress());
     }
-    //@Transtional
-    public void deletMember(Long id){
+    @Transactional
+    public void deleteMember(Long id){
         Member member=memberRepository.findById(id);
         if (member==null){
             throw new RuntimeException("회원을 찾을 수 없습니다.");

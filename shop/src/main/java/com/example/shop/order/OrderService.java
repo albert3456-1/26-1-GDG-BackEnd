@@ -1,8 +1,5 @@
 package com.example.shop.order;
 
-import com.example.shop.member.Member;
-import com.example.shop.member.MemberRepository;
-import com.example.shop.member.dto.MemberCreateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +40,7 @@ public class OrderService {
         }
         return order;
     }
-    public void deletOrder(Long id){
+    public void deleteOrder(Long id){
         Order order=orderRepository.findById(id);
         if (order==null){
             throw new RuntimeException("주문을 찾을 수 없습니다.");
