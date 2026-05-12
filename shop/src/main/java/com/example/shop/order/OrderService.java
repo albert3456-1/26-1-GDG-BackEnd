@@ -3,7 +3,7 @@ package com.example.shop.order;
 import com.example.shop.order.dto.OrderCreateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
@@ -12,7 +12,7 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
 
-    //@Transtional
+    @Transactional
     public long createOrder(OrderCreateRequest request){
         Order existingOrder=orderRepository.findByOrderId(request.getOrderId());
         if( existingOrder!=null){
@@ -20,19 +20,19 @@ public class OrderService {
         }
         Order order=new Order(
                 request.getOrderId(),
-                request.getTotal_price(),
-                request.getPoint_used(),
-                request.getCash_amount()
+                request.getTotalPrice(),
+                request.getPointUsed(),
+                request.getCashAmount()
         );
         orderRepository.save(order);
 
         return order.getId();
     }
-
+    @Transactional(readOnly = true)
     public List<Order> getAllOrders(){
         return orderRepository.findAll();
     }
-
+    @Transactional(readOnly = true)
     public Order getOrderById(Long id) {
         Order order =orderRepository.findById(id);
         if (order==null){
@@ -40,6 +40,7 @@ public class OrderService {
         }
         return order;
     }
+    @Transactional
     public void deleteOrder(Long id){
         Order order=orderRepository.findById(id);
         if (order==null){

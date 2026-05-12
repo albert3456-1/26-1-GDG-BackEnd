@@ -6,15 +6,15 @@ import lombok.Getter;
 public class OrderCreateRequest {
     private String orderId;
     private String status;
-    private int total_price;
-    private int point_used;
-    private int cash_amount;
+    private int totalPrice;
+    private int pointUsed;
+    private int cashAmount;
 
-    public OrderCreateRequest(String orderId, String status, int total_price,int point_used,int cash_amount){
+    public OrderCreateRequest(String orderId, String status, int totalPrice,int pointUsed,int cashAmount){
         this.orderId=orderId;
         this.status=status;
-        this.total_price=total_price;
-        this.point_used=point_used;
-        this.cash_amount=cash_amount;
+        this.totalPrice=totalPrice;
+        this.pointUsed=pointUsed;
+        this.cashAmount=cashAmount;
     }
 }
