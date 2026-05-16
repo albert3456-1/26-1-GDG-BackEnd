@@ -1,6 +1,7 @@
 package com.example.shop.order;
 
 import com.example.shop.order.dto.OrderCreateRequest;
+import com.example.shop.order.service.OrderServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import java.util.List;
 @RequestMapping("/orders")
 public class OrderController {
 
-    private final OrderService orderService;
+    private final OrderServiceImpl orderService;
 
     @PostMapping
     public ResponseEntity<Void> createOrder(@RequestBody OrderCreateRequest request){

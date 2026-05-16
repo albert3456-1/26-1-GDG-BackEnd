@@ -2,6 +2,7 @@ package com.example.shop.product;
 
 import com.example.shop.product.dto.ProductCreateRequest;
 import com.example.shop.product.dto.ProductUpdateRequest;
+import com.example.shop.product.service.ProductServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class ProductController {
 
-    private final ProductService productService;
+    private final ProductServiceImpl productService;
 
     @PostMapping
     public ResponseEntity<Void> createProduct(@RequestBody ProductCreateRequest request){

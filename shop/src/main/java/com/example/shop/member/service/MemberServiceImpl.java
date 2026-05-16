@@ -19,7 +19,7 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
 
 
-//    public MemberService(@Qualifier("mainMemberRepository") MemberRepository memberRepository){
+    //    public MemberService(@Qualifier("mainMemberRepository") MemberRepository memberRepository){
 //        this.memberRepository=memberRepository;
 //    }
     @Override
