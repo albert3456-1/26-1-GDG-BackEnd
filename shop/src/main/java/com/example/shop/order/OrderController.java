@@ -1,13 +1,10 @@
 package com.example.shop.order;
 
-import com.example.shop.member.MemberService;
-import com.example.shop.member.dto.MemberCreateRequest;
 import com.example.shop.order.dto.OrderCreateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Member;
 import java.net.URI;
 import java.util.List;
 

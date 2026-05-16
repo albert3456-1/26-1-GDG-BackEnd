@@ -12,7 +12,7 @@ public class Member {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="member_id")
-    private long id;
+    private Long id;
     @Column(name="member_login_id",length = 50)
     private String loginId;
     @Column(name="member_pw",length = 100)
@@ -42,5 +42,9 @@ public class Member {
         if(address != null){
             this.address=address;
         }
+    }
+
+    public void setId(Long id){
+        this.id=id;
     }
 }
