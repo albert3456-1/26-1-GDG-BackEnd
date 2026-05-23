@@ -1,5 +1,8 @@
 package com.example.shop.product.service;
 
+import com.example.shop.common.exception.BadRequestException;
+import com.example.shop.common.exception.NotFoundException;
+import com.example.shop.common.message.ErrorMessage;
 import com.example.shop.product.Product;
 import com.example.shop.product.dto.ProductCreateRequest;
 import com.example.shop.product.dto.ProductUpdateRequest;
@@ -21,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
     public Long createProduct(ProductCreateRequest request){
         Product existingProduct=productRepository.findByName(request.getName());
         if( existingProduct!=null){
-            throw new RuntimeException("이미 존재하는 로그인 상품입니다: "+request.getName());
+            throw new BadRequestException(ErrorMessage.PRODUCT_ALREADY_EXISTS +request.getName());
         }
         Product product=new Product(
                 request.getName(),
@@ -41,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
     public Product getProductById(Long id) {
         Product product =productRepository.findById(id);
         if (product==null){
-            throw new RuntimeException("상품을 찾을 수 없습니다.");
+            throw new NotFoundException(ErrorMessage.PRODUCT_NOT_FOUND);
         }
         return product;
     }
@@ -50,16 +53,22 @@ public class ProductServiceImpl implements ProductService {
     public void updateProduct(Long id, ProductUpdateRequest request){
         Product product=productRepository.findById(id);
         if (product==null){
-            throw new RuntimeException("상품을 찾을 수 없습니다.");
+            throw new NotFoundException(ErrorMessage.PRODUCT_NOT_FOUND);
         }
-        product.updateInfo(request.getName(),request.getPrice(),request.getAmount());
+
+        String name= request.getName() != null ? request.getName(): product.getName();;
+        Integer price= request.getPrice() != null ? request.getPrice():product.getPrice();
+        Integer amount= request.getAmount() != null ? request.getAmount(): product.getAmount();
+
+
+        product.updateInfo(name,price,amount);
     }
     @Override
     @Transactional
     public void deleteProduct(Long id){
         Product product=productRepository.findById(id);
         if (product==null){
-            throw new RuntimeException("상품을 찾을 수 없습니다.");
+            throw new NotFoundException(ErrorMessage.PRODUCT_NOT_FOUND);
         }
         productRepository.deleteById(id);
     }

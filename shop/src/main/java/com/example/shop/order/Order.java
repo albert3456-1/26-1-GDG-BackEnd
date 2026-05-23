@@ -28,15 +28,15 @@ public class Order {
 
     @Column(name="order_date")
     private LocalDateTime orderDate;
-    @Column(name="total_price")
+    @Column(name="total_price", precision = 10, scale = 0)
     private int totalPrice;
-    @Column(name="point_used")
+    @Column(name="point_used",scale = 0)
     private int pointused;
-    @Column(name="cash_amount")
+    @Column(name="cash_amount",scale = 0)
     private int cashAmount;
     @Column(name="status")
     private String status;
-    @Column(name="order_code")
+    @Column(name="order_code", length = 50)
     private String orderId;
 
     public Order(String orderId, int totalPrice, int pointused,int cashAmount){

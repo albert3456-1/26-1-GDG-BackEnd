@@ -19,12 +19,12 @@ public class Product {
     @JoinColumn(name="order_id")
     private Order order;
 
-    @Column(name = "product_name")
+    @Column(name = "product_name", length=50)
     private String name;
-    @Column(name = "product_price")
-    private int price;
-    @Column(name = "product_amount")
-    private int amount;
+    @Column(name = "product_price",precision=10,scale = 0)
+    private Integer price;
+    @Column(name = "product_amount",precision = 7,scale = 0)
+    private Integer amount;
 
     public Product(String name, int price, int amount) {
         this.name = name;
@@ -32,15 +32,9 @@ public class Product {
         this.amount = amount;
     }
 
-    public void updateInfo(String name, int price, int amount) {
-        if (name != null) {
-            this.name = name;
-        }
-        /*if(price != null) {
-            this.price = price;
-        }
-        if(amount != null){
-            this.amount=amount;
-        }*/
+    public void updateInfo(String name, Integer price, Integer amount) {
+        this.name = name;
+        this.price = price;
+        this.amount=amount;
     }
 }
